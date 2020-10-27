@@ -1,0 +1,41 @@
+@import './theme.scss';
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $clr-text-100;
+	font-weight: 700;
+	font-size: inherit;
+	padding: 0.55em 1.25em;
+	background-color: $clr-accent;
+	border-radius: 3px;
+	transition: background 200ms ease-in-out;
+
+	&:hover,
+	&:focus {
+		background-color: darken($clr-accent, 20%);
+	}
+
+	&--danger {
+		background-color: $clr-danger;
+
+		&:hover,
+		&:focus {
+			background-color: darken($clr-danger, 10%);
+		}
+	}
+
+	&--success {
+		background-color: $clr-success;
+
+		&:hover,
+		&:focus {
+			background-color: darken($clr-success, 10%);
+		}
+	}
+
+	&__icon {
+		margin-right: 0.5rem;
+	}
+}

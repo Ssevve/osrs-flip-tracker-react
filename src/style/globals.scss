@@ -1,0 +1,59 @@
+@import './theme.scss';
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: $clr-bg-200;
+	margin: 0;
+	min-height: 100vh;
+	font-family: 'Open Sans', sans-serif;
+	line-height: 1.5;
+	display: grid;
+	grid-template-rows: 4rem 1fr;
+
+	@media (min-width: 48em) {
+		grid-template-rows: 5rem 1fr;
+	}
+}
+
+ul {
+	padding: 0;
+	list-style-type: none;
+}
+
+input[type='text'],
+input[type='submit'],
+button {
+	height: 2.6875rem;
+}
+
+input[type='text'] {
+	padding: 0.65em 0.75em;
+	border-radius: 3px;
+	border: 1px solid $clr-border;
+	font-size: inherit;
+	color: inherit;
+
+	&:focus {
+		border: 2px solid $clr-accent;
+		outline: none;
+	}
+}
+
+button,
+input[type='submit'] {
+	border: none;
+	cursor: pointer;
+}
+
+label {
+	font-size: 0.875rem;
+}

@@ -1,0 +1,41 @@
+@import '../../style/theme.scss';
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	box-shadow: 0 0 5px 2px rgba(#333, 0.1);
+
+	@media (min-width: 48em) {
+		height: 5rem;
+	}
+
+	&__container {
+		width: 90%;
+		max-width: 73.125rem;
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+
+		&-image {
+			height: 1.5rem;
+			margin-right: 0.3rem;
+
+			@media (min-width: 48em) {
+				height: 2.5rem;
+				margin-right: 0.5rem;
+			}
+		}
+
+		&-text {
+			font-size: 1.25rem;
+
+			@media (min-width: 48em) {
+				font-size: 1.5rem;
+			}
+		}
+	}
+}

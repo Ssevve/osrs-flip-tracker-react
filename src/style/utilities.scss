@@ -1,5 +1,22 @@
 @import './theme.scss';
 
+.asterisk {
+	color: $clr-danger;
+}
+
+.thin-text {
+	font-weight: 300;
+	font-size: 0.875rem;
+}
+
+.block {
+	display: block;
+}
+
+.section-title {
+	font-size: 1.4em;
+}
+
 .btn {
 	display: flex;
 	align-items: center;

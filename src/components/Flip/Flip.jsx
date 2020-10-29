@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import moment from 'moment';
+import Moment from 'react-moment';
 
 import './Flip.scss';
 
-function Flip(props) {
-  const [flip, setFlip] = useState(props.flip);
-  const [timeAgo, setTimeAgo] = useState(moment(flip.createdAt).fromNow());
-
-  useEffect(() => {
-    // Update timeAgo every minute
-    const interval = setInterval(() => setTimeAgo(moment(flip.createdAt).fromNow()), 60000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
+function Flip({ flip, deleteFlip, refreshFlip, setCompleteFlip }) {
 
   const toggleExpand = (e) => {
     e.target.parentElement.parentElement.classList.toggle('expanded');
@@ -30,18 +20,8 @@ function Flip(props) {
 
   const onInputHandler = (e) => {
     if (!isNaN(e.target.value)) {
-      setFlip({...flip, [e.target.name]: e.target.value.trim()});
+      // setFlip({...flip, [e.target.name]: e.target.value.trim()});
     }
-  }
-
-  const refreshFlip = () => {
-    // Set createdAt to the current time
-    setFlip({...flip, createdAt: Date.now()});
-    setTimeAgo(moment(flip.createdAt).fromNow());
-  }
-
-  const setComplete = () => {
-    flip.complete = true;
   }
 
   return (
@@ -61,7 +41,9 @@ function Flip(props) {
           {(flip.sellPrice * flip.quantity) - (flip.buyPrice * flip.quantity)}
         </p>
         <p className="flip__time">
-          {timeAgo}
+          <Moment interval={1000} fromNow>
+              {flip.createdAt}
+          </Moment>
         </p>
       </div>
       <div className="flip__expand">
@@ -75,24 +57,24 @@ function Flip(props) {
             <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice} />
           </label>
           <label>
-            Sell price
-            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} />
-          </label>
-          <label>
             Quantity
             <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} />
           </label>
+          <label>
+            Sell price
+            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} />
+          </label>
         </div>
         <div className="flip__bottom-buttons">
-          <button className="flip__refresh btn" onClick={refreshFlip}>
+          <button className="flip__refresh btn" onClick={() => refreshFlip(flip.id)}>
             <i className="btn__icon fas fa-redo-alt"></i>
             Refresh
           </button>
-          <button className="flip__complete btn btn--success" onClick={setComplete}>
+          <button className="flip__complete btn btn--success" onClick={() => setCompleteFlip(flip.id)}>
             <i className="btn__icon fas fa-check"></i> 
             <p>Complete</p>
           </button>
-          <button className="flip__delete btn btn--danger">
+          <button className="flip__delete btn btn--danger" onClick={() => deleteFlip(flip.id)}>
             <i className="btn__icon fas fa-trash"></i>
             Delete
           </button>

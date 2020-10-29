@@ -35,7 +35,7 @@ function NewFlipForm(props) {
 
     if (isFormValid) {
       const id = uuidv4();
-      props.setActiveFlips((activeFlips) => [...activeFlips, {...newFlip, id}]);
+      props.setFlips((flips) => [...flips, {...newFlip, id}]);
       setNewFlip(initialFlipState);
       setFormErrors(initialErrors);
     }  

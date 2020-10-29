@@ -7,12 +7,14 @@ import NewFlipForm from '../NewFlipForm/NewFlipForm';
 import ActiveFlips from '../ActiveFlips/ActiveFlips';
 
 function Tracker() {
-  const [activeFlips, setActiveFlips] = useState([]);
+  const [flips, setFlips] = useState([]);
+  // const [activeFlips, setActiveFlips] = useState([]);
+  // const [completedFlips, setCompletedFlips] = useState([]);
 
   return (
     <main className="tracker">
-      <NewFlipForm setActiveFlips={setActiveFlips} />
-      <ActiveFlips activeFlips={activeFlips} />
+      <NewFlipForm setFlips={setFlips} />
+      <ActiveFlips flips={flips} />
     </main>       
   )
 }

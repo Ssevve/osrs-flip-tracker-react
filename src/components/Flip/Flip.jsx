@@ -9,6 +9,7 @@ function Flip(props) {
   const [timeAgo, setTimeAgo] = useState(moment(flip.createdAt).fromNow());
 
   useEffect(() => {
+    // Update timeAgo every minute
     const interval = setInterval(() => setTimeAgo(moment(flip.createdAt).fromNow()), 60000);
     return () => {
       clearInterval(interval);
@@ -34,8 +35,13 @@ function Flip(props) {
   }
 
   const refreshFlip = () => {
+    // Set createdAt to the current time
     setFlip({...flip, createdAt: Date.now()});
     setTimeAgo(moment(flip.createdAt).fromNow());
+  }
+
+  const setComplete = () => {
+    flip.complete = true;
   }
 
   return (
@@ -76,14 +82,13 @@ function Flip(props) {
             Quantity
             <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} />
           </label>
-          {/* <button className="btn" onClick={updateFlip}>Update</button> */}
         </div>
         <div className="flip__bottom-buttons">
           <button className="flip__refresh btn" onClick={refreshFlip}>
             <i className="btn__icon fas fa-redo-alt"></i>
             Refresh
           </button>
-          <button className="flip__complete btn btn--success">
+          <button className="flip__complete btn btn--success" onClick={setComplete}>
             <i className="btn__icon fas fa-check"></i> 
             <p>Complete</p>
           </button>

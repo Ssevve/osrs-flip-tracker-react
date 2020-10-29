@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { v4 as uuidv4 } from 'uuid';
+
 import './NewFlipForm.scss';
 
 const initialFlipState = {
@@ -7,6 +9,7 @@ const initialFlipState = {
   buyPrice: '',
   quantity: '',
   sellPrice: '',
+  createdAt: Date.now(),
   completed: false
 };
 
@@ -31,7 +34,8 @@ function NewFlipForm(props) {
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      props.setActiveFlips((activeFlips) => [...activeFlips, newFlip]);
+      const id = uuidv4();
+      props.setActiveFlips((activeFlips) => [...activeFlips, {...newFlip, id}]);
       setNewFlip(initialFlipState);
       setFormErrors(initialErrors);
     }  
@@ -81,7 +85,7 @@ function NewFlipForm(props) {
             Item name
             <span className="asterisk"> *</span>
             <input 
-              className="form__input" 
+              className={formErrors.itemNameError ? 'form__input error' : 'form__input'}
               type="text" 
               name="itemName" 
               value={newFlip.itemName} 
@@ -95,7 +99,7 @@ function NewFlipForm(props) {
             Buy price
             <span className="asterisk"> *</span>
             <input 
-              className="form__input" 
+              className={formErrors.buyPriceError ? 'form__input error' : 'form__input'} 
               type="text" 
               name="buyPrice" 
               value={newFlip.buyPrice} 
@@ -109,7 +113,7 @@ function NewFlipForm(props) {
             Quantity
             <span className="asterisk"> *</span>
             <input 
-              className="form__input" 
+              className={formErrors.quantityError ? 'form__input error' : 'form__input'} 
               type="text" 
               name="quantity" 
               value={newFlip.quantity} 
@@ -122,7 +126,7 @@ function NewFlipForm(props) {
           <label className="form__label">
             Sell price
             <input 
-              className="form__input" 
+              className={formErrors.sellPriceError ? 'form__input error' : 'form__input'} 
               type="text" 
               name="sellPrice" 
               value={newFlip.sellPrice} 

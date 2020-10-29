@@ -12,8 +12,8 @@ function Flip(props) {
     const interval = setInterval(() => setTimeAgo(moment(flip.createdAt).fromNow()), 60000);
     return () => {
       clearInterval(interval);
-  };
-});
+    };
+  });
 
   const toggleExpand = (e) => {
     e.target.parentElement.parentElement.classList.toggle('expanded');

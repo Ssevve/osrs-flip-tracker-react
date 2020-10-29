@@ -47,23 +47,23 @@ function NewFlipForm(props) {
     let quantityError = '';
     let sellPriceError = '';
 
-    if (!newFlip.itemName) {
+    if (!newFlip.itemName.trim()) {
       itemNameError = 'Item name cannot be empty';
     }
 
-    if (!newFlip.buyPrice) {
+    if (!newFlip.buyPrice.trim()) {
       buyPriceError = 'Buy price cannot be empty';
     } else if (isNaN(newFlip.buyPrice)) {
       buyPriceError = 'Buy price must be a number';
     }
 
-    if (!newFlip.quantity) {
+    if (!newFlip.quantity.trim()) {
       quantityError = 'Quantity cannot be empty';
     } else if (isNaN(newFlip.quantity)) {
       quantityError = 'Quantity must be a number';
     }
 
-    if (isNaN(newFlip.sellPrice)) {
+    if (isNaN(newFlip.sellPrice.trim())) {
       sellPriceError = 'Sell price must be a number';
     }
 

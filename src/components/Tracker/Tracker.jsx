@@ -12,7 +12,7 @@ function Tracker() {
   return (
     <main className="tracker">
       <NewFlipForm setActiveFlips={setActiveFlips} />
-      <ActiveFlips />
+      <ActiveFlips activeFlips={activeFlips} />
     </main>       
   )
 }

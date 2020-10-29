@@ -28,7 +28,9 @@ function Flip(props) {
   }
 
   const onInputHandler = (e) => {
-    setFlip({...flip, [e.target.name]: e.target.value});
+    if (!isNaN(e.target.value)) {
+      setFlip({...flip, [e.target.name]: e.target.value.trim()});
+    }
   }
 
   const refreshFlip = () => {

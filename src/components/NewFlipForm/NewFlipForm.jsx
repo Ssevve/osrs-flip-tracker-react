@@ -9,7 +9,6 @@ const initialFlipState = {
   buyPrice: '',
   quantity: '',
   sellPrice: '',
-  createdAt: Date.now(),
   isComplete: false
 };
 
@@ -34,7 +33,7 @@ function NewFlipForm({ addFlip }) {
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      addFlip({...newFlip, id: uuidv4()});
+      addFlip({...newFlip, id: uuidv4(), createdAt: Date.now()});
       setNewFlip(initialFlipState);
       setFormErrors(initialErrors);
     }  

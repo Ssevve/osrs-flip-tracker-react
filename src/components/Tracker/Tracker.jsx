@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import './Tracker.scss';
 
@@ -6,15 +6,17 @@ import './Tracker.scss';
 import NewFlipForm from '../NewFlipForm/NewFlipForm';
 import ActiveFlips from '../ActiveFlips/ActiveFlips';
 
-function Tracker() {
-  const [flips, setFlips] = useState([]);
-  // const [activeFlips, setActiveFlips] = useState([]);
-  // const [completedFlips, setCompletedFlips] = useState([]);
+function Tracker({ addFlip, deleteFlip, refreshFlip, setCompleteFlip, flips }) {
 
   return (
     <main className="tracker">
-      <NewFlipForm setFlips={setFlips} />
-      <ActiveFlips flips={flips} />
+      <NewFlipForm addFlip={addFlip} />
+      <ActiveFlips  
+        deleteFlip={deleteFlip}
+        refreshFlip={refreshFlip}
+        setCompleteFlip={setCompleteFlip}
+        flips={flips} 
+      />
     </main>       
   )
 }

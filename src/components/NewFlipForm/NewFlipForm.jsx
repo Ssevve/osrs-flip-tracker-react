@@ -10,7 +10,7 @@ const initialFlipState = {
   quantity: '',
   sellPrice: '',
   createdAt: Date.now(),
-  completed: false
+  isComplete: false
 };
 
 const initialErrors = {
@@ -20,7 +20,7 @@ const initialErrors = {
   sellPriceError: '',
 };
 
-function NewFlipForm(props) {
+function NewFlipForm({ addFlip }) {
   const [newFlip, setNewFlip] = useState(initialFlipState);
   const [formErrors, setFormErrors] = useState(initialErrors);
 
@@ -28,14 +28,13 @@ function NewFlipForm(props) {
     setNewFlip({...newFlip, [e.target.name]: e.target.value});
   };
 
-  const onSubmitHandler = (e) => {
+  const formSubmitHandler = (e) => {
     e.preventDefault();
 
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      const id = uuidv4();
-      props.setFlips((flips) => [...flips, {...newFlip, id}]);
+      addFlip({...newFlip, id: uuidv4()});
       setNewFlip(initialFlipState);
       setFormErrors(initialErrors);
     }  
@@ -78,12 +77,12 @@ function NewFlipForm(props) {
 
   return (
     <>
-      <form className="form" onSubmit={onSubmitHandler}>
+      <form className="form" onSubmit={formSubmitHandler}>
         <h2 className="form__title">Add new flip</h2>
         <div className="form__group">
           <label className="form__label">
             Item name
-            <span className="asterisk"> *</span>
+            <span className="required-asterisk"> *</span>
             <input 
               className={formErrors.itemNameError ? 'form__input error' : 'form__input'}
               type="text" 
@@ -97,7 +96,7 @@ function NewFlipForm(props) {
         <div className="form__group">
           <label className="form__label">
             Buy price
-            <span className="asterisk"> *</span>
+            <span className="required-asterisk"> *</span>
             <input 
               className={formErrors.buyPriceError ? 'form__input error' : 'form__input'} 
               type="text" 
@@ -111,7 +110,7 @@ function NewFlipForm(props) {
         <div className="form__group">
           <label className="form__label">
             Quantity
-            <span className="asterisk"> *</span>
+            <span className="required-asterisk"> *</span>
             <input 
               className={formErrors.quantityError ? 'form__input error' : 'form__input'} 
               type="text" 
@@ -136,12 +135,12 @@ function NewFlipForm(props) {
           <small className="form__error">{formErrors.sellPriceError}</small>
         </div>
         <label className="form__checkbox-label" htmlFor="add-status">
-          Mark completed
+          Mark complete
           <input 
             className="form__checkbox" 
             id="add-status" 
             type="checkbox" 
-            onChange={() => setNewFlip({...newFlip, completed: !newFlip.completed})} 
+            onChange={() => setNewFlip({...newFlip, isComplete: !newFlip.isComplete})} 
           />  
         </label>
         <input className="btn form__submit" type="submit" value="Add" />

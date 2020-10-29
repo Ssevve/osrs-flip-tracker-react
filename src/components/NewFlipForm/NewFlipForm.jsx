@@ -53,13 +53,13 @@ function NewFlipForm(props) {
 
     if (!newFlip.buyPrice.trim()) {
       buyPriceError = 'Buy price cannot be empty';
-    } else if (isNaN(newFlip.buyPrice)) {
+    } else if (isNaN(newFlip.buyPrice.trim())) {
       buyPriceError = 'Buy price must be a number';
     }
 
     if (!newFlip.quantity.trim()) {
       quantityError = 'Quantity cannot be empty';
-    } else if (isNaN(newFlip.quantity)) {
+    } else if (isNaN(newFlip.quantity.trim())) {
       quantityError = 'Quantity must be a number';
     }
 

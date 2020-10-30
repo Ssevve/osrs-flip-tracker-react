@@ -14,8 +14,12 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
     return flip.sellPrice ? flip.sellPrice - flip.buyPrice : 'N/A';
   }
 
-  const calcRoi = () => {
+  const calcROI = () => {
     return flip.sellPrice ? (calcMargin() / flip.buyPrice * 100).toFixed(2) : 'N/A';
+  }
+
+  const calcProfit = () => {
+    return (flip.sellPrice * flip.quantity) - (flip.buyPrice * flip.quantity);
   }
 
   const onInputHandler = (e) => {
@@ -25,21 +29,50 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
     }
   }
 
+  // 
+  // const round = (number, precision) => {
+  //   const prec = Math.pow(10, precision);
+  //   return Math.round(number * prec) / prec;
+  // }
+  
+  // // Format number (1000 -> 1K, 1000000 -> 1M, etc.)
+  // const pow = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
+  // const abbr = 'KMBT';
+
+  // const formatNumber = (number) => {
+  //     let base = floor(log(abs(number))/log(1000));
+  //     const suffix = abbr[Math.min(2, base - 1)];
+  //     base = abbr.indexOf(suffix) + 1;
+  //     return suffix ? round(number/pow(1000,base),2)+suffix : ''+number;
+  // }
+
+  const formatShortNumber = (number) => {
+    return new Intl.NumberFormat('en', {
+      notation: "compact",
+      compactDisplay: "short",
+      maximumFractionDigits: 1,
+    }).format(number);
+  }
+  
+  const formatLongNumber = (number) => {
+    return new Intl.NumberFormat('en').format(number);
+  }
+
   return (
     <li className="flip">
       <h3 className="flip__name">{flip.itemName}</h3>
       <div className="flip__details">
         <p className="flip__margin">
           <span className="thin-text block">Margin</span>
-          {calcMargin()}
+          {formatShortNumber(calcMargin())}
         </p>
         <p className="flip__roi">
           <span className="thin-text block">ROI%</span>
-          {calcRoi()}
+          {calcROI()}
         </p>
         <p className="flip__profit">
           <span className="thin-text block">Profit</span>
-          {(flip.sellPrice * flip.quantity) - (flip.buyPrice * flip.quantity)}
+          {formatShortNumber(calcProfit())}
         </p>
         <p className="flip__time">
           <Moment interval={1000} fromNow>

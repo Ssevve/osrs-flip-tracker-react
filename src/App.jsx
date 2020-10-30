@@ -25,6 +25,16 @@ function App() {
     setFlips(flips.filter((flip) => flip.id !== id));
   }
 
+  const editFlip = (id, edit) => {
+    const updatedFlips = flips.map((flip) => {
+      if(flip.id === id) {
+        flip = {...flip, ...edit};
+      }
+      return flip;
+    });
+    setFlips(updatedFlips);
+  }
+
   const refreshFlip = (id) => {
     const updatedFlips = flips.map((flip) => {
       if (flip.id === id) {
@@ -41,6 +51,7 @@ function App() {
       <Tracker 
         addFlip={addFlip} 
         deleteFlip={deleteFlip}
+        editFlip={editFlip}
         refreshFlip={refreshFlip}
         setCompleteFlip={setCompleteFlip} 
         flips={flips} 

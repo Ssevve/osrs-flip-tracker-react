@@ -5,7 +5,7 @@ import './ActiveFlips.scss';
 // Component imports
 import Flip from '../Flip/Flip';
 
-function ActiveFlips({ deleteFlip, refreshFlip, setCompleteFlip, flips }) {
+function ActiveFlips({ deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips }) {
   const activeFlips = flips.filter(flip => !flip.isComplete);
   return (
     <section className="active-flips">
@@ -18,6 +18,7 @@ function ActiveFlips({ deleteFlip, refreshFlip, setCompleteFlip, flips }) {
                 key={flip.id} 
                 flip={flip} 
                 deleteFlip={deleteFlip}
+                editFlip={editFlip}
                 refreshFlip={refreshFlip}
                 setCompleteFlip={setCompleteFlip}
               />

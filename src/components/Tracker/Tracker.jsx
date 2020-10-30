@@ -3,16 +3,17 @@ import React from 'react'
 import './Tracker.scss';
 
 // Component imports
-import NewFlipForm from '../NewFlipForm/NewFlipForm';
+import AddFlipForm from '../AddFlipForm/AddFlipForm';
 import ActiveFlips from '../ActiveFlips/ActiveFlips';
 
-function Tracker({ addFlip, deleteFlip, refreshFlip, setCompleteFlip, flips }) {
+function Tracker({ addFlip, deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips }) {
 
   return (
     <main className="tracker">
-      <NewFlipForm addFlip={addFlip} />
+      <AddFlipForm addFlip={addFlip} />
       <ActiveFlips  
         deleteFlip={deleteFlip}
+        editFlip={editFlip}
         refreshFlip={refreshFlip}
         setCompleteFlip={setCompleteFlip}
         flips={flips} 

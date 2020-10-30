@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 
 import './Flip.scss';
 
-function Flip({ flip, deleteFlip, refreshFlip, setCompleteFlip }) {
+function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
 
   const toggleExpand = (e) => {
     e.target.parentElement.parentElement.classList.toggle('expanded');
@@ -20,7 +20,8 @@ function Flip({ flip, deleteFlip, refreshFlip, setCompleteFlip }) {
 
   const onInputHandler = (e) => {
     if (!isNaN(e.target.value)) {
-      // setFlip({...flip, [e.target.name]: e.target.value.trim()});
+      const edit = {[e.target.name]: e.target.value};
+      editFlip(flip.id, edit);
     }
   }
 
@@ -54,15 +55,15 @@ function Flip({ flip, deleteFlip, refreshFlip, setCompleteFlip }) {
         <div className="flip__inputs">
           <label>
             Buy price
-            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice} />
+            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice.trim()} />
           </label>
           <label>
             Quantity
-            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} />
+            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity.trim()} />
           </label>
           <label>
             Sell price
-            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} />
+            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice.trim()} />
           </label>
         </div>
         <div className="flip__bottom-buttons">

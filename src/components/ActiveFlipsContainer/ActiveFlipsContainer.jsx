@@ -1,11 +1,11 @@
 import React from 'react'
 
-import './ActiveFlips.scss';
+import './ActiveFlipsContainer.scss';
 
 // Component imports
 import Flip from '../Flip/Flip';
 
-function ActiveFlips({ deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips }) {
+function ActiveFlipsContainer({ deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips }) {
   const activeFlips = flips.filter(flip => !flip.isComplete);
   return (
     <section className="active-flips">
@@ -14,9 +14,9 @@ function ActiveFlips({ deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips
         {
           activeFlips.map((flip) => {
             return (
-              <Flip 
-                key={flip.id} 
-                flip={flip} 
+              <Flip
+                key={flip.id}
+                flip={flip}
                 deleteFlip={deleteFlip}
                 editFlip={editFlip}
                 refreshFlip={refreshFlip}
@@ -30,4 +30,4 @@ function ActiveFlips({ deleteFlip, editFlip, refreshFlip, setCompleteFlip, flips
   )
 }
 
-export default ActiveFlips;
+export default ActiveFlipsContainer;

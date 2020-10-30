@@ -29,28 +29,13 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
     }
   }
 
-  // 
-  // const round = (number, precision) => {
-  //   const prec = Math.pow(10, precision);
-  //   return Math.round(number * prec) / prec;
-  // }
-  
-  // // Format number (1000 -> 1K, 1000000 -> 1M, etc.)
-  // const pow = Math.pow, floor = Math.floor, abs = Math.abs, log = Math.log;
-  // const abbr = 'KMBT';
-
-  // const formatNumber = (number) => {
-  //     let base = floor(log(abs(number))/log(1000));
-  //     const suffix = abbr[Math.min(2, base - 1)];
-  //     base = abbr.indexOf(suffix) + 1;
-  //     return suffix ? round(number/pow(1000,base),2)+suffix : ''+number;
-  // }
-
   const formatShortNumber = (number) => {
+    if (isNaN(number)) return 'N/A';
+
     return new Intl.NumberFormat('en', {
       notation: "compact",
       compactDisplay: "short",
-      maximumFractionDigits: 1,
+      maximumFractionDigits: 2,
     }).format(number);
   }
   
@@ -62,7 +47,7 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
     <li className="flip">
       <h3 className="flip__name">{flip.itemName}</h3>
       <div className="flip__details">
-        <p className="flip__margin">
+        <p className="flip__margin" >
           <span className="thin-text block">Margin</span>
           {formatShortNumber(calcMargin())}
         </p>
@@ -88,15 +73,15 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
         <div className="flip__inputs">
           <label>
             Buy price
-            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice.trim()} />
+            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice} />
           </label>
           <label>
             Quantity
-            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity.trim()} />
+            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} />
           </label>
           <label>
             Sell price
-            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice.trim()} />
+            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} />
           </label>
         </div>
         <div className="flip__bottom-buttons">

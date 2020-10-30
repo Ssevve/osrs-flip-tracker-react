@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid';
 
-import './NewFlipForm.scss';
+import './AddFlipForm.scss';
 
 const initialFlipState = {
   itemName: '',
@@ -19,7 +19,7 @@ const initialErrors = {
   sellPriceError: '',
 };
 
-function NewFlipForm({ addFlip }) {
+function AddFlipForm({ addFlip }) {
   const [newFlip, setNewFlip] = useState(initialFlipState);
   const [formErrors, setFormErrors] = useState(initialErrors);
 
@@ -148,4 +148,4 @@ function NewFlipForm({ addFlip }) {
   )
 }
 
-export default NewFlipForm;
+export default AddFlipForm;

@@ -47,18 +47,18 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
     <li className="flip">
       <h3 className="flip__name">{flip.itemName}</h3>
       <div className="flip__details">
-        <p className="flip__margin" >
+        <div className="flip__margin" data-tooltip={formatLongNumber(calcMargin())}>
           <span className="thin-text block">Margin</span>
-          {formatShortNumber(calcMargin())}
-        </p>
-        <p className="flip__roi">
+          <p>{formatShortNumber(calcMargin())}</p>
+        </div>
+        <div className="flip__roi">
           <span className="thin-text block">ROI%</span>
-          {calcROI()}
-        </p>
-        <p className="flip__profit">
+          <p>{calcROI()}</p>
+        </div>
+        <div className="flip__profit" data-tooltip={formatLongNumber(calcProfit())}>
           <span className="thin-text block">Profit</span>
-          {formatShortNumber(calcProfit())}
-        </p>
+          <p>{formatShortNumber(calcProfit())}</p>
+        </div>
         <p className="flip__time">
           <Moment interval={1000} fromNow>
               {flip.createdAt}

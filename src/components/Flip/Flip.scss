@@ -33,6 +33,7 @@
 		grid-template-rows: repeat(2, 1fr);
 		row-gap: 2rem;
 		transition: max-height 200ms ease-out, padding 100ms ease-out;
+		overflow: hidden;
 
 		@media (min-width: 48em) {
 			grid-column: 2 / 3;
@@ -42,6 +43,7 @@
 			align-items: center;
 			max-height: unset;
 			transition: none;
+			overflow: visible;
 		}
 	}
 

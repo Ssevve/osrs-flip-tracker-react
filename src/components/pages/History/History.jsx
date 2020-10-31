@@ -2,9 +2,9 @@ import React from 'react'
 
 import './History.scss';
 
-function History() {
+function History({ flips }) {
   return (
-    <>
+    <main className="flip-history">
       <h2 className="section-title">Flip history</h2>
       <table>
         <thead>
@@ -19,7 +19,7 @@ function History() {
           </tr>
         </thead>
       </table>
-    </>
+    </main>
   );
 };
 

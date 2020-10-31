@@ -16,7 +16,7 @@ function ActiveFlips({ functions, flips }) {
       <FlipContainer
         functions={functions}
         flips={activeFlips}
-        title='Active flips'
+        title="Active flips"
       />
     </main>       
   )

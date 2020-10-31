@@ -63,7 +63,7 @@ function App() {
           exact path="/" 
           render={() => <ActiveFlips functions={functions} flips={flips} />} 
         />
-        <Route path="/history" render={() => <History functions={functions} flips={flips} />} /> 
+        <Route path="/history" render={() => <History flips={flips} />} /> 
       </div>
     </Router>
   );

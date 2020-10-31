@@ -3,8 +3,8 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 // Components imports
 import Header from './components/Header/Header';
-import Tracker from './components/Tracker/Tracker';
-import History from './components/History/History';
+import ActiveFlips from './components/pages/ActiveFlips/ActiveFlips';
+import History from './components/pages/History/History';
 
 function App() {
   const [flips, setFlips] = useState([]);
@@ -47,23 +47,23 @@ function App() {
     setFlips(updatedFlips);
   }
 
+  const functions = {
+    addFlip,
+    setCompleteFlip,
+    editFlip,
+    refreshFlip,
+    deleteFlip,
+  }
+
   return (
     <Router>
       <div className="app">
         <Header />
         <Route 
           exact path="/" 
-          render={() =>
-          <Tracker 
-            addFlip={addFlip}
-            deleteFlip={deleteFlip}
-            editFlip={editFlip}
-            refreshFlip={refreshFlip}
-            setCompleteFlip={setCompleteFlip}
-            flips={flips}
-          />
-          } 
-        /> 
+          render={() => <ActiveFlips functions={functions} flips={flips} />} 
+        />
+        <Route path="/history" render={() => <History functions={functions} flips={flips} />} /> 
       </div>
     </Router>
   );

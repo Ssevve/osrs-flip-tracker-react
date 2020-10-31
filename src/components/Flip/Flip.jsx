@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 
 import './Flip.scss';
 
-function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
+function Flip({ flip, functions }) {
 
   const toggleExpand = (e) => {
     e.target.parentElement.parentElement.classList.toggle('expanded');
@@ -25,7 +25,7 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
   const onInputHandler = (e) => {
     if (!isNaN(e.target.value)) {
       const edit = {[e.target.name]: e.target.value};
-      editFlip(flip.id, edit);
+      functions.editFlip(flip.id, edit);
     }
   }
 
@@ -85,15 +85,15 @@ function Flip({ flip, deleteFlip, editFlip, refreshFlip, setCompleteFlip }) {
           </label>
         </div>
         <div className="flip__bottom-buttons">
-          <button className="flip__refresh btn" onClick={() => refreshFlip(flip.id)}>
+          <button className="flip__refresh btn" onClick={() => functions.refreshFlip(flip.id)}>
             <i className="btn__icon fas fa-redo-alt"></i>
             Refresh
           </button>
-          <button className="flip__complete btn btn--success" onClick={() => setCompleteFlip(flip.id)}>
+          <button className="flip__complete btn btn--success" onClick={() => functions.setCompleteFlip(flip.id)}>
             <i className="btn__icon fas fa-check"></i> 
             <p>Complete</p>
           </button>
-          <button className="flip__delete btn btn--danger" onClick={() => deleteFlip(flip.id)}>
+          <button className="flip__delete btn btn--danger" onClick={() => functions.deleteFlip(flip.id)}>
             <i className="btn__icon fas fa-trash"></i>
             Delete
           </button>

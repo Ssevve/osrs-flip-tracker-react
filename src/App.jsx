@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 // Components imports
 import Header from './components/Header/Header';
 import Tracker from './components/Tracker/Tracker';
+import History from './components/History/History';
 
 function App() {
   const [flips, setFlips] = useState([]);
@@ -46,17 +48,24 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <Header />
-      <Tracker 
-        addFlip={addFlip} 
-        deleteFlip={deleteFlip}
-        editFlip={editFlip}
-        refreshFlip={refreshFlip}
-        setCompleteFlip={setCompleteFlip} 
-        flips={flips} 
-      />
-    </div>
+    <Router>
+      <div className="app">
+        <Header />
+        <Route 
+          exact path="/" 
+          render={() =>
+          <Tracker 
+            addFlip={addFlip}
+            deleteFlip={deleteFlip}
+            editFlip={editFlip}
+            refreshFlip={refreshFlip}
+            setCompleteFlip={setCompleteFlip}
+            flips={flips}
+          />
+          } 
+        /> 
+      </div>
+    </Router>
   );
 }
 

@@ -6,15 +6,15 @@ import './ActiveFlips.scss';
 import AddFlipForm from '../../AddFlipForm/AddFlipForm';
 import FlipContainer from '../../FlipContainer/FlipContainer';
 
-function ActiveFlips({ functions, flips }) {
+function ActiveFlips({ crudFunctions, flips }) {
 
   const activeFlips = flips.filter(flip => !flip.isComplete);
 
   return (
     <main className="active-flips">
-      <AddFlipForm addFlip={functions.addFlip} />
+      <AddFlipForm addFlip={crudFunctions.addFlip} />
       <FlipContainer
-        functions={functions}
+        crudFunctions={crudFunctions}
         flips={activeFlips}
         title="Active flips"
       />

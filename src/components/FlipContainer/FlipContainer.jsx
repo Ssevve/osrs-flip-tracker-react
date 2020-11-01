@@ -5,7 +5,7 @@ import './FlipContainer.scss';
 // Component imports
 import Flip from '../Flip/Flip';
 
-function FlipContainer({functions, flips,  title}) {
+function FlipContainer({crudFunctions, flips, title}) {
   return (
     <section className="flips">
       <h2 className="section-title">{title} ({flips.length})</h2>
@@ -16,7 +16,7 @@ function FlipContainer({functions, flips,  title}) {
               <Flip
                 key={flip.id}
                 flip={flip}
-                functions={functions}
+                crudFunctions={crudFunctions}
               />
             )
           })

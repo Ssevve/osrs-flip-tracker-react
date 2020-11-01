@@ -1,24 +1,16 @@
 import React from 'react'
+import { formatLongNumber, calcProfit } from './../../../utils';
 
 import './History.scss';
 
 function History({ flips }) {
+
+  const completedFlips = flips.filter((flip) => flip.isComplete);
+  const totalProfit = completedFlips.reduce((total, flip) => total += calcProfit(flip), 0);
+
   return (
     <main className="flip-history">
-      <h2 className="section-title">Flip history</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Item name</th>
-            <th>Buy price</th>
-            <th>Sell price</th>
-            <th>Margin</th>
-            <th>Quantity</th>
-            <th>ROI%</th>
-            <th>Profit</th>
-          </tr>
-        </thead>
-      </table>
+      <h2 className="section-title">Total profit: {formatLongNumber(totalProfit)}</h2>
     </main>
   );
 };

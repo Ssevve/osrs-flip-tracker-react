@@ -23,10 +23,6 @@ function App() {
     setFlips(updatedFlips);
   }
 
-  const deleteFlip = (id) => {
-    setFlips(flips.filter((flip) => flip.id !== id));
-  }
-
   const editFlip = (id, edit) => {
     const updatedFlips = flips.map((flip) => {
       if(flip.id === id) {
@@ -47,7 +43,11 @@ function App() {
     setFlips(updatedFlips);
   }
 
-  const functions = {
+  const deleteFlip = (id) => {
+    setFlips(flips.filter((flip) => flip.id !== id));
+  }
+
+  const crudFunctions = {
     addFlip,
     setCompleteFlip,
     editFlip,
@@ -61,9 +61,9 @@ function App() {
         <Header />
         <Route 
           exact path="/" 
-          render={() => <ActiveFlips functions={functions} flips={flips} />} 
+          render={() => <ActiveFlips crudFunctions={crudFunctions} flips={flips} />} 
         />
-        <Route path="/history" render={() => <History flips={flips} />} /> 
+        <Route path="/history" render={() => <History crudFunctions={crudFunctions} flips={flips} />} /> 
       </div>
     </Router>
   );

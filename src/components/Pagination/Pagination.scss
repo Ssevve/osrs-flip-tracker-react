@@ -1,0 +1,50 @@
+@import '../../style/theme.scss';
+
+.pagination {
+	display: flex;
+
+	&__item + &__item {
+		margin-left: 0.5rem;
+	}
+
+	&__page {
+		padding: 0.25rem 0.65rem;
+		position: relative;
+		z-index: 1;
+		transition: color 150ms ease-in-out;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: -1;
+			background-color: $clr-bg-900;
+			border-radius: $radius-border;
+			transform: scaleY(0);
+			transform-origin: bottom;
+			transition: transform 150ms ease-in-out, background 150ms ease-in-out;
+		}
+
+		&--current {
+			color: $clr-text-100;
+			font-weight: 700;
+
+			&::before {
+				background-color: $clr-accent;
+				transform: scaleY(1);
+			}
+		}
+
+		&:hover,
+		&:focus {
+			color: $clr-text-100;
+
+			&::before {
+				transform: scaleY(1);
+			}
+		}
+	}
+}

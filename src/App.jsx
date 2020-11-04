@@ -98,7 +98,51 @@ function App() {
       createdAt: 1604319660803,
       id: 10345
     },
-    
+    {
+      itemName: 'item11',
+      buyPrice: '40',
+      quantity: '10',
+      sellPrice: '50',
+      isComplete: true,
+      createdAt: 1604490844514,
+      id: 654632
+    },
+    {
+      itemName: 'item12',
+      buyPrice: '40',
+      quantity: '10',
+      sellPrice: '50',
+      isComplete: true,
+      createdAt: 1604490844514,
+      id: 7654345
+    },
+    {
+      itemName: 'item13',
+      buyPrice: '40',
+      quantity: '10',
+      sellPrice: '50',
+      isComplete: true,
+      createdAt: 1604490844514,
+      id: 8345345
+    },
+    {
+      itemName: 'item14',
+      buyPrice: '40',
+      quantity: '10',
+      sellPrice: '50',
+      isComplete: true,
+      createdAt: 1604490844514,
+      id: 976554
+    },
+    {
+      itemName: 'item15',
+      buyPrice: '40',
+      quantity: '10',
+      sellPrice: '50',
+      isComplete: true,
+      createdAt: 1604490844514,
+      id: 1034534
+    },
   ]);
 
   const addFlip = (newFlip) => {

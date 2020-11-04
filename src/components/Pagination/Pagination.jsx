@@ -13,13 +13,13 @@ function Pagination({ flipsPerPage, totalFlips, changePage, currentPage }) {
     <ul className="pagination">
       {pageNumbers.map((number) => (
       <li className='pagination__item' key={number}>
-        <a 
+        <button 
           className={currentPage === number ? 'pagination__page pagination__page--current' : 'pagination__page'} 
           href="#" 
           onClick={() => changePage(number)}
         >
           {number}
-        </a>
+        </button>
       </li>
       ))}
     </ul>

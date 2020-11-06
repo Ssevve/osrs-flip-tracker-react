@@ -15,7 +15,8 @@ function ActiveFlips({ crudFunctions, flips }) {
       <AddFlipForm addFlip={crudFunctions.addFlip} />
       <FlipContainer
         crudFunctions={crudFunctions}
-        flips={activeFlips}
+        displayFlips={activeFlips}
+        flipCount={activeFlips.length}
         title="Active flips"
       />
     </main>       

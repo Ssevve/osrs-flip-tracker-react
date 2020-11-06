@@ -29,5 +29,6 @@ export const formatShortNumber = (number) => {
 };
 
 export const formatLongNumber = (number) => {
+	if (isNaN(number)) return 'N/A';
 	return new Intl.NumberFormat('en').format(number);
 };

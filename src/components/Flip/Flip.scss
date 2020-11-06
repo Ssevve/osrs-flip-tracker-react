@@ -117,7 +117,8 @@
 		}
 
 		&-checkbox {
-			place-self: stretch;
+			// place-self: stretch;
+			height: 100%;
 			opacity: 0;
 			cursor: pointer;
 		}

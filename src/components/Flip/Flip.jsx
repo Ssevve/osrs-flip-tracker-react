@@ -2,6 +2,8 @@ import React from 'react'
 import Moment from 'react-moment';
 import { formatShortNumber, formatLongNumber, calcMargin, calcROI, calcProfit } from '../../utils';
 
+import moment from 'moment';
+
 import './Flip.scss';
 
 function Flip({ flip, crudFunctions }) {
@@ -34,9 +36,12 @@ function Flip({ flip, crudFunctions }) {
           <p>{formatShortNumber(calcProfit(flip))}</p>
         </div>
         <p className="flip__time">
-          <Moment interval={1000} fromNow>
-              {flip.createdAt}
-          </Moment>
+          { 
+            flip.isComplete
+              ? moment(flip.createdAt).format('DD/MM/YYYY')
+              : <Moment interval={1000} fromNow>{flip.createdAt}</Moment>
+          }
+          
         </p>
       </div>
       <div className="flip__expand">
@@ -47,26 +52,35 @@ function Flip({ flip, crudFunctions }) {
         <div className="flip__inputs">
           <label>
             Buy price
-            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice} />
+            <input className="flip__input" type="text" name="buyPrice" onInput={onInputHandler} value={flip.buyPrice} disabled={flip.isComplete} />
           </label>
           <label>
             Quantity
-            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} />
+            <input className="flip__input" type="text" name="quantity" onInput={onInputHandler} value={flip.quantity} disabled={flip.isComplete} />
           </label>
           <label>
             Sell price
-            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} />
+            <input className="flip__input" type="text" name="sellPrice" onInput={onInputHandler} value={flip.sellPrice} disabled={flip.isComplete} />
           </label>
         </div>
         <div className="flip__bottom-buttons">
-          <button className="flip__refresh btn" onClick={() => crudFunctions.refreshFlip(flip.id)}>
-            <i className="btn__icon fas fa-redo-alt"></i>
-            Refresh
-          </button>
-          <button className="flip__complete btn btn--success" onClick={() => crudFunctions.setCompleteFlip(flip.id)}>
-            <i className="btn__icon fas fa-check"></i> 
-            <p>Complete</p>
-          </button>
+
+          { 
+            !flip.isComplete &&
+              <button className="flip__refresh btn" onClick={() => crudFunctions.refreshFlip(flip.id)}>
+                <i className="btn__icon fas fa-redo-alt"></i>
+                Refresh
+              </button>
+          }
+
+          { 
+            !flip.isComplete &&
+              <button className="flip__complete btn btn--success" onClick={() => crudFunctions.setCompleteFlip(flip.id)}>
+                <i className="btn__icon fas fa-check"></i> 
+                <p>Complete</p>
+              </button>
+          }
+
           <button className="flip__delete btn btn--danger" onClick={() => crudFunctions.deleteFlip(flip.id)}>
             <i className="btn__icon fas fa-trash"></i>
             Delete

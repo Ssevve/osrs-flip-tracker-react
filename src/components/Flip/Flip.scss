@@ -163,6 +163,12 @@
 		}
 	}
 
+	&__delete {
+		@media (min-width: 48em) {
+			grid-column: 3 / 4;
+		}
+	}
+
 	&.expanded {
 		.flip {
 			&__details {

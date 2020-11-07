@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { formatLongNumber, calcProfit } from './../../../utils';
+import ReactPaginate from 'react-paginate';
 
 import moment from 'moment';
 
@@ -8,7 +9,6 @@ import './History.scss';
 // Component imports
 import Chart from '../../Chart/Chart';
 import FlipContainer from '../../FlipContainer/FlipContainer';
-import Pagination from '../../Pagination/Pagination';
 
 function History({ flips, crudFunctions }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +16,7 @@ function History({ flips, crudFunctions }) {
   const [numOfDays] = useState(7);
 
   const completedFlips = flips.filter((flip) => flip.isComplete);
-  console.log({completedFlips});
+  // console.log({completedFlips});
 
   const flipsData = [];
 
@@ -52,7 +52,7 @@ function History({ flips, crudFunctions }) {
       }
     });
   }
-  console.log(flipsData);
+  // console.log(flipsData);
 
   // Get total profit of the completed flips
   const totalProfit = flipsData.reduce((total, current) => total += current.profit, 0);
@@ -66,7 +66,7 @@ function History({ flips, crudFunctions }) {
   // Get total number of pages
   const pageCount = Math.ceil(completedFlips.length / flipsPerPage);
 
-  const changePage = (pageNumber) => setCurrentPage(pageNumber);
+  const changePage = ({ selected: selectedPage }) => setCurrentPage(selectedPage + 1);
 
   return (
     <main className="flip-history">
@@ -78,14 +78,20 @@ function History({ flips, crudFunctions }) {
         flipCount={completedFlips.length}
         title="Completed Flips"
       />
-      { pageCount > 1 &&
-      <Pagination 
-        flipsPerPage={flipsPerPage} 
-        totalFlips={completedFlips.length} 
-        changePage={changePage}
-        currentPage={currentPage}
+      <ReactPaginate
+        containerClassName="pagination"
+        pageLinkClassName="pagination__link"
+        activeLinkClassName="pagination__link--active"
+        previousLinkClassName="pagination__link"
+        nextLinkClassName="pagination__link"
+        breakClassName="pagination__break"
+        previousLabel="<"
+        nextLabel=">"
+        pageCount={pageCount}
+        pageRangeDisplayed={2}
+        marginPagesDisplayed={2}
+        onPageChange={changePage}
       />
-      }
     </main>
   );
 };

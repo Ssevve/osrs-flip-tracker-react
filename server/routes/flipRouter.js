@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const authorize = require('../middleware/authorize');
+const authenticate = require('../middleware/authenticate');
 const Flip = require('../models/flipModel');
 
-router.post('/', authorize, async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
 	try {
 		const { itemName, buyPrice, quantity, isComplete } = req.body;
 		let { sellPrice } = req.body;
@@ -43,12 +43,12 @@ router.post('/', authorize, async (req, res) => {
 	}
 });
 
-router.get('/all', authorize, async (req, res) => {
+router.get('/all', authenticate, async (req, res) => {
 	const flips = await Flip.find({ userId: req.user });
 	res.json(flips);
 });
 
-router.delete('/:id', authorize, async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
 	const flip = await Flip.find({ _id: req.params.id, userId: req.user });
 	if (!flip) {
 		return res.status(400).json({

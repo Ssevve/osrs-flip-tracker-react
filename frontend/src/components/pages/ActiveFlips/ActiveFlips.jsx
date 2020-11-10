@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import FlipContext from '../../../context/FlipContext';
 
 import './ActiveFlips.scss';
 
@@ -6,7 +8,8 @@ import './ActiveFlips.scss';
 import AddFlipForm from '../../AddFlipForm/AddFlipForm';
 import FlipContainer from '../../FlipContainer/FlipContainer';
 
-function ActiveFlips({ crudFunctions, flips }) {
+function ActiveFlips() {
+  const { flips, crudFunctions } = useContext(FlipContext);
 
   const activeFlips = flips.filter(flip => !flip.isComplete);
 

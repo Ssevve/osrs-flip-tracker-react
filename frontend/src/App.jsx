@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
+import FlipContext from './context/FlipContext';
+
 // Components imports
 import Header from './components/Header/Header';
 import ActiveFlips from './components/pages/ActiveFlips/ActiveFlips';
@@ -201,16 +203,23 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="app">
-        <Header />
-        <Route 
-          exact path="/" 
-          render={() => <ActiveFlips crudFunctions={crudFunctions} flips={flips} />} 
-        />
-        <Route path="/history" render={() => <History crudFunctions={crudFunctions} flips={flips} />} /> 
-      </div>
-    </Router>
+    <>
+      <Router>
+        <FlipContext.Provider value={{ flips, crudFunctions }}>
+          <div className="app">
+            <Header />
+            <Route
+              exact path="/"
+              component={ActiveFlips}
+            />
+            <Route
+              path="/history"
+              component={History}
+            /> 
+          </div>
+        </FlipContext.Provider>
+      </Router>
+    </>
   );
 }
 

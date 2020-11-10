@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { formatLongNumber, calcProfit } from './../../../utils';
 import ReactPaginate from 'react-paginate';
+
+import FlipContext from '../../../context/FlipContext';
 
 import moment from 'moment';
 
@@ -10,10 +12,12 @@ import './History.scss';
 import Chart from '../../Chart/Chart';
 import FlipContainer from '../../FlipContainer/FlipContainer';
 
-function History({ flips, crudFunctions }) {
+function History() {
   const [currentPage, setCurrentPage] = useState(1);
   const [flipsPerPage] = useState(5);
   const [numOfDays] = useState(7);
+
+  const {flips, crudFunctions} = useContext(FlipContext);
 
   const completedFlips = flips.filter((flip) => flip.isComplete);
   // console.log({completedFlips});

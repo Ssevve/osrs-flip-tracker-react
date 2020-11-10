@@ -208,14 +208,8 @@ function App() {
         <FlipContext.Provider value={{ flips, crudFunctions }}>
           <div className="app">
             <Header />
-            <Route
-              exact path="/"
-              component={ActiveFlips}
-            />
-            <Route
-              path="/history"
-              component={History}
-            /> 
+            <Route exact path="/" component={ActiveFlips} />
+            <Route path="/history" component={History} /> 
           </div>
         </FlipContext.Provider>
       </Router>

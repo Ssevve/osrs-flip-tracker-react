@@ -29,3 +29,4 @@ mongoose.connect(
 
 // Routes
 app.use('/users', require('./routes/userRouter'));
+app.use('/flips', require('./routes/flipRouter'));

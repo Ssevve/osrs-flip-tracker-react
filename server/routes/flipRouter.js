@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const authenticate = require('../middleware/authenticate');
+const auth = require('../middleware/auth');
 const Flip = require('../models/flipModel');
 
-router.post('/', authenticate, async (req, res) => {
+router.post('/', auth, async (req, res) => {
 	try {
 		const { itemName, buyPrice, quantity, isComplete } = req.body;
 		let { sellPrice } = req.body;
@@ -17,14 +17,28 @@ router.post('/', authenticate, async (req, res) => {
 			return res.status(400).json({ msg: 'Buy price must be a number.' });
 		}
 
+		if (buyPrice < 0) {
+			return res.status(400).json({ msg: 'Buy price can not be less than 0.' });
+		}
+
 		if (isNaN(quantity)) {
 			return res.status(400).json({ msg: 'Quantity must be a number.' });
+		}
+
+		if (quantity < 0) {
+			return res.status(400).json({ msg: 'Quantity can not be less than 0.' });
 		}
 
 		if (!sellPrice) sellPrice = 0;
 
 		if (isNaN(sellPrice)) {
 			return res.status(400).json({ msg: 'Sell price must be a number.' });
+		}
+
+		if (sellPrice < 0) {
+			return res
+				.status(400)
+				.json({ msg: 'Sell price can not be less than 0.' });
 		}
 
 		const newFlip = new Flip({
@@ -43,12 +57,12 @@ router.post('/', authenticate, async (req, res) => {
 	}
 });
 
-router.get('/all', authenticate, async (req, res) => {
+router.get('/all', auth, async (req, res) => {
 	const flips = await Flip.find({ userId: req.user });
 	res.json(flips);
 });
 
-router.delete('/:id', authenticate, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 	const flip = await Flip.find({ _id: req.params.id, userId: req.user });
 	if (!flip) {
 		return res.status(400).json({

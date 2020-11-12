@@ -1,55 +1,52 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 const User = require('../models/userModel');
 
-router.post('/register', async (req, res) => {
+router.post('/signup', async (req, res) => {
 	try {
-		const { email, password, passwordCheck, displayName } = req.body;
+		const schema = Joi.object({
+			username: Joi.string().alphanum().min(4).max(30).trim().required(),
+			password: Joi.string().min(8).trim().required(),
+			passwordCheck: Joi.ref('password'),
+		});
 
 		// Validate
-		if (!email || !password || !passwordCheck || !displayName) {
-			return res.status(400).json({ msg: 'All fields are required.' });
+		const result = schema.validate(req.body);
+		if (!result.error) {
+			// Make sure username is unique
+			const existingUser = await User.findOne({ username: req.body.username });
+			if (existingUser) {
+				return res
+					.status(400)
+					.json({ error: 'Account with this username already exists.' });
+			}
+
+			// Hash the password
+			const salt = await bcrypt.genSalt();
+			const passwordHash = await bcrypt.hash(req.body.password, salt);
+
+			const newUser = new User({
+				username: req.body.username,
+				password: passwordHash,
+			});
+
+			// Save user to the DB
+			const savedUser = await newUser.save();
+			res.json({
+				username: savedUser.username,
+				_id: savedUser._id,
+				createdAt: savedUser.createdAt,
+				updatedAt: savedUser.updatedAt,
+			});
 		}
 
-		if (password.length < 8) {
-			return res
-				.status(400)
-				.json({ msg: 'Password must be at least 8 characters long.' });
+		if (result.error.message.includes('passwordCheck')) {
+			return res.status(400).json({ error: 'Passwords do not match.' });
+		} else {
+			return res.status(400).json({ error: result.error.message });
 		}
-
-		if (password !== passwordCheck) {
-			return res.status(400).json({ msg: "Passwords don't match." });
-		}
-
-		const existingEmail = await User.findOne({ email });
-		if (existingEmail) {
-			return res
-				.status(400)
-				.json({ msg: 'Account with this email already exists.' });
-		}
-
-		const existingDisplayName = await User.findOne({ displayName });
-		if (existingDisplayName) {
-			return res.status(400).json({ msg: 'Display name already taken.' });
-		}
-
-		// Hash the password
-		const salt = await bcrypt.genSalt();
-		const passwordHash = await bcrypt.hash(password, salt);
-
-		const newUser = new User({
-			email,
-			password: passwordHash,
-			displayName,
-		});
-
-		// Save user to the DB
-		const savedUser = await newUser.save();
-		res.json({
-			email,
-			displayName,
-		});
 	} catch (err) {
 		return res.status(500).json({ error: err.message });
 	}

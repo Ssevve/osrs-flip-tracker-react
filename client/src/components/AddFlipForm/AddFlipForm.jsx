@@ -4,22 +4,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 import './AddFlipForm.scss';
 
-const initialFlipState = {
-  itemName: '',
-  buyPrice: '',
-  quantity: '',
-  sellPrice: '',
-  isComplete: false
-};
-
-const initialErrors = {
-  itemNameError: '',
-  buyPriceError: '',
-  quantityError: '',
-  sellPriceError: '',
-};
-
 function AddFlipForm({ addFlip }) {
+  const initialFlipState = {
+    itemName: '',
+    buyPrice: '',
+    quantity: '',
+    sellPrice: '',
+    isComplete: false
+  };
+  
+  const initialErrors = {
+    itemNameError: '',
+    buyPriceError: '',
+    quantityError: '',
+    sellPriceError: '',
+  };
+
   const [newFlip, setNewFlip] = useState(initialFlipState);
   const [formErrors, setFormErrors] = useState(initialErrors);
 
@@ -76,9 +76,9 @@ function AddFlipForm({ addFlip }) {
 
   return (
     <>
-      <form className="form" onSubmit={formSubmitHandler}>
+      <form className="form add-form" onSubmit={formSubmitHandler}>
         <h2 className="form__title">Add new flip</h2>
-        <div className="form__group">
+        <div className="form__group add-form__group">
           <label className="form__label">
             Item name
             <span className="required-asterisk"> *</span>
@@ -92,7 +92,7 @@ function AddFlipForm({ addFlip }) {
           </label>
           <small className="form__error">{formErrors.itemNameError}</small>
         </div>
-        <div className="form__group">
+        <div className="form__group add-form__group">
           <label className="form__label">
             Buy price
             <span className="required-asterisk"> *</span>
@@ -106,7 +106,7 @@ function AddFlipForm({ addFlip }) {
           </label>
           <small className="form__error">{formErrors.buyPriceError}</small>
         </div>
-        <div className="form__group">
+        <div className="form__group add-form__group">
           <label className="form__label">
             Quantity
             <span className="required-asterisk"> *</span>
@@ -120,7 +120,7 @@ function AddFlipForm({ addFlip }) {
           </label>
           <small className="form__error">{formErrors.quantityError}</small>
         </div>
-        <div className="form__group">
+        <div className="form__group add-form__group">
           <label className="form__label">
             Sell price
             <input 

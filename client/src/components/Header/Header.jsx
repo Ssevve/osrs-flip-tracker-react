@@ -22,6 +22,12 @@ function Header() {
               <li className="nav__desktop-item">
                 <NavLink className="nav__desktop-link" activeClassName="nav__desktop-link--active" to="/history">History</NavLink>
               </li>
+              <li className="nav__desktop-item">
+                <NavLink className="nav__desktop-link" activeClassName="nav__desktop-link--active" to="/signup">Signup</NavLink>
+              </li>
+              <li className="nav__desktop-item">
+                <NavLink className="nav__desktop-link" activeClassName="nav__desktop-link--active" to="/login">Login</NavLink>
+              </li>
             </ul>
           </nav>
         </div>

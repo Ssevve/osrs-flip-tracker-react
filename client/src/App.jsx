@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import FlipContext from './context/FlipContext';
+
+import './style/general.scss';
+import './style/reusables.scss';
 
 // Components imports
 import Header from './components/Header/Header';
 import ActiveFlips from './components/pages/ActiveFlips/ActiveFlips';
 import History from './components/pages/History/History';
+import Signup from './components/pages/Signup/Signup';
+import Login from './components/pages/Login/Login';
 
 function App() {
   const [flips, setFlips] = useState([
@@ -208,8 +213,12 @@ function App() {
         <FlipContext.Provider value={{ flips, crudFunctions }}>
           <div className="app">
             <Header />
-            <Route exact path="/" component={ActiveFlips} />
-            <Route path="/history" component={History} /> 
+            <Switch>
+              <Route exact path="/" component={ActiveFlips} />
+              <Route path="/history" component={History} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+            </Switch>
           </div>
         </FlipContext.Provider>
       </Router>

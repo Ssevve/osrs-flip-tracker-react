@@ -9,7 +9,6 @@ router.post('/signup', async (req, res) => {
 		const schema = Joi.object({
 			username: Joi.string().alphanum().min(4).max(30).trim().required(),
 			password: Joi.string().min(8).trim().required(),
-			passwordCheck: Joi.ref('password'),
 		});
 
 		// Validate
@@ -42,9 +41,7 @@ router.post('/signup', async (req, res) => {
 			});
 		}
 
-		if (result.error.message.includes('passwordCheck')) {
-			return res.status(400).json({ error: 'Passwords do not match.' });
-		} else {
+		if (result.error.message) {
 			return res.status(400).json({ error: result.error.message });
 		}
 	} catch (err) {

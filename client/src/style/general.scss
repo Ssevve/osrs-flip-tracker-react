@@ -31,11 +31,13 @@ ul {
 
 input[type='text'],
 input[type='submit'],
+input[type='password'],
 button {
 	height: 2.6875rem;
 }
 
-input[type='text'] {
+input[type='text'],
+input[type='password'] {
 	padding: 0.65em 0.75em;
 	border-radius: 3px;
 	border: 1px solid $clr-border;

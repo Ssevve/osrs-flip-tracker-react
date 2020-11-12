@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import image from '../../coins.png';
 
@@ -10,10 +10,10 @@ function Header() {
   return (
     <header className="header">
         <div className="header__container">
-          <div className="header__logo">
+          <Link to="/" className="header__logo">
             <img className="header__logo-image" src={image} alt="" />
             <h1 className="header__logo-text">OSRS Flip Tracker</h1>
-          </div>
+          </Link>
           <nav className="nav">
             <ul className="nav__desktop-menu">
               <li className="nav__desktop-item">

@@ -73,7 +73,7 @@ function History() {
   const changePage = ({ selected: selectedPage }) => setCurrentPage(selectedPage + 1);
 
   return (
-    <main className="flip-history">
+    <main className="main">
       <h2 className="section-title">Total profit: {formatLongNumber(totalProfit)}</h2>
       <Chart data={flipsData} numOfDays={numOfDays} />
       <FlipContainer

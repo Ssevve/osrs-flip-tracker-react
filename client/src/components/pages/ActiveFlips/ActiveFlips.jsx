@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import FlipContext from '../../../context/FlipContext';
 
-import './ActiveFlips.scss';
+// import '../../../style/reusables.scss';
 
 // Component imports
 import AddFlipForm from '../../AddFlipForm/AddFlipForm';
@@ -14,7 +14,7 @@ function ActiveFlips() {
   const activeFlips = flips.filter(flip => !flip.isComplete);
 
   return (
-    <main className="active-flips">
+    <main className="main">
       <AddFlipForm addFlip={crudFunctions.addFlip} />
       <FlipContainer
         crudFunctions={crudFunctions}

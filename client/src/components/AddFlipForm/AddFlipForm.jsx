@@ -142,7 +142,7 @@ function AddFlipForm({ addFlip }) {
             onChange={() => setNewFlip({...newFlip, isComplete: !newFlip.isComplete})} 
           />  
         </label>
-        <input className="btn form__submit" type="submit" value="Add" />
+        <input className="btn form__submit add-form__submit" type="submit" value="Add" />
       </form>
     </>
   )

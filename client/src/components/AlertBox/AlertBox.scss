@@ -1,0 +1,8 @@
+.alert-box {
+	padding: 1rem;
+	border-radius: 3px;
+	&.error {
+		background: #f8d7da;
+		color: #821c3a;
+	}
+}

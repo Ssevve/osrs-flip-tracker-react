@@ -18,7 +18,7 @@ router.post('/signup', async (req, res) => {
 			const existingUser = await User.findOne({ username: req.body.username });
 			if (existingUser) {
 				return res
-					.status(400)
+					.status(409)
 					.json({ message: 'Account with this username already exists.' });
 			}
 
@@ -42,7 +42,7 @@ router.post('/signup', async (req, res) => {
 		}
 
 		if (result.error.message) {
-			res.status(400).json({ message: result.error.message });
+			res.status(409).json({ message: result.error.message });
 		}
 	} catch (err) {
 		res.status(500).json({ message: err.message });

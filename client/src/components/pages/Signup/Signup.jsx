@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Joi from 'joi';
 
 // Component imports
@@ -12,16 +13,58 @@ function Signup() {
     passwordCheck: '',
   });
 
+  const history = useHistory();
+
   const handleChange = (e) => {
     setError('');
     setUserData({...userData, [e.target.name]: e.target.value});
   };
 
-  const handleSubmit = (e) => {
+  const formatError = (error) => {
+    const words = error.split(' ');
+    words[0] = words[0].replace(/\"/g, '');
+    words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+    const formattedError = words.join(' ');
+    return formattedError + '.';
+  };
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+		setError('');
     if (isValidUser()) {
-      console.log('Valid');
+      // Send data to server
+      const body = {
+        username: userData.username,
+        password: userData.password,
+      };
+
+      const SIGNUP_URL = 'http://localhost:5000/users/signup';
+      const options = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'content-type': 'application/json',
+        },
+      };
+
+      const res = await fetch(SIGNUP_URL, options);
+      if (res.ok) {
+        // Account creation successful
+        const createdUserData = await res.json();
+        console.log(createdUserData);
+        console.log('Account creation successful. Redirecting to login page.');
+        history.push('/login');
+
+      // Handle errors
+      } else if (res.status === 500) {
+        const error = await res.json();
+        console.log(error);
+        setError('Server error occurred. Please try again.'); 
+      } else {
+        const error = await res.json();
+        setError(error.message);
+      }
     }
   };
 
@@ -38,19 +81,11 @@ function Signup() {
     }
 
     if (result.error.message.includes('passwordCheck')) {
-      setError('Passwords do not match.')
+      setError('Passwords do not match.');
     } else {
       setError(formatError(result.error.message));
     }
     return false;
-  };
-
-  const formatError = (error) => {
-    const words = error.split(' ');
-    words[0] = words[0].replace(/\"/g, '');
-    words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
-    const formattedError = words.join(' ');
-    return formattedError + '.';
   };
   
   return (

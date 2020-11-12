@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
 			if (existingUser) {
 				return res
 					.status(400)
-					.json({ error: 'Account with this username already exists.' });
+					.json({ message: 'Account with this username already exists.' });
 			}
 
 			// Hash the password
@@ -33,7 +33,7 @@ router.post('/signup', async (req, res) => {
 
 			// Save user to the DB
 			const savedUser = await newUser.save();
-			res.json({
+			res.status(201).json({
 				username: savedUser.username,
 				_id: savedUser._id,
 				createdAt: savedUser.createdAt,
@@ -42,10 +42,10 @@ router.post('/signup', async (req, res) => {
 		}
 
 		if (result.error.message) {
-			return res.status(400).json({ error: result.error.message });
+			res.status(400).json({ message: result.error.message });
 		}
 	} catch (err) {
-		return res.status(500).json({ error: err.message });
+		res.status(500).json({ message: err.message });
 	}
 });
 

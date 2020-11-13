@@ -27,7 +27,7 @@ function Signup() {
     const formattedError = words.join(' ');
     return formattedError + '.';
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +87,8 @@ function Signup() {
     }
     return false;
   };
-  
+
+
   return (
     <main className="main">
       <form className="form signup-form" onSubmit={handleSubmit}>
